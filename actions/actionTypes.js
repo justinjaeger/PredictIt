@@ -1,1 +1,2 @@
-export const TEST_ACTION = 'TEST_ACTION';
+export const ENTER_FILM = 'ENTER_FILM';
+export const DISPLAY_SEARCH = 'DISPLAY_SEARCH';

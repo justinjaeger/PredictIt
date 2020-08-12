@@ -11,10 +11,11 @@ class App extends Component {
     return (
       <div>
         this is the app.jsx
-        {/* <PredictionsContainer /> */}
+        <PredictionsContainer />
       </div>
     );
   }
 }
 
 export default App;
+// imports to src/index.js

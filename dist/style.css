@@ -1,3 +1,45 @@
 * {
-  color: red;
+}
+
+h2 {
+  margin: 0px;
+}
+
+#prediction-container {
+  border: 1px solid black;
+  padding: 5px;
+  margin: 30px 0 0 30px; 
+  width: 50%;
+}
+.prediction-box {
+  list-style: none;
+  border: 1px solid gray;
+  flex: auto;
+  padding: 20px;
+  margin: 5px;
+}
+
+#film-entry-container {
+  border: 1px solid black;
+  padding: 5px;
+  margin: 30px 0 0 30px; 
+  width: 50%;
+}
+#film-entry-input {
+  padding: 5px;
+  width: 50%;
+}
+
+#film-entry-dropdown {
+
+}
+
+.dropdown-cell {
+  list-style: none;
+  padding: 5px;
+  width: 50%;
+  border: 1px solid black;
+}
+.dropdown-cell:hover {
+  cursor: hand;
 }

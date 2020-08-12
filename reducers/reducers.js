@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-
 // import all reducers here
 import predictionsReducer from './predictionsReducer';
 
@@ -9,5 +8,6 @@ const reducers = combineReducers({ // list all reducers inside
   predictions: predictionsReducer, // use the word PREDICTIONS when mapping state to props
 });
 
-// export combined reducers so we can import in other files
+// export combined reducers
 export default reducers;
+// imports to src/index.js
