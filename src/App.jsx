@@ -6,15 +6,9 @@ class App extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log('componentDidMount');
-  }
-
   render() {
-    console.log('rendering in app.jsx');
     return (
       <div>
-        this is the app.jsx
         <PredictionsContainer />
       </div>
     );

@@ -27,7 +27,6 @@ const PredictionEntry = (props) => {
           poster = {poster}
           index = {index}
           enterFilm = {props.enterFilm}
-          // searchArr = {props.searchArr}
           key = {i}
         />
       );

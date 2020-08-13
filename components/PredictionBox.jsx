@@ -18,56 +18,18 @@ const PredictionBox = (props) => {
       }
     };
     load();
-  }, []);
+  }, [results]);
 
-  const deleteEntry = () => {
-    console.log(results.imdbID)
-    props.deleteEntry(results.imdbID)
-  };
-
-  const moveUp = () => {
-    props.moveUp(results.imdbID)
-  };
-
-  const moveDown = () => {
-    props.moveDown(results.imdbID)
-  };
-
-  // FOR CONDITIONAL RENDERING //
-  // if (results !== undefined) {
-  //   return (
-  //     <div className="prediction-box">
-  //       <li className="list-rank">#{props.index}</li>
-  //       <h3>{results.Title}</h3>
-  //       <li>Directed by <strong>{results.Director}</strong></li>
-  //       <li>imdbID:{results.imdbID}</li>
-  
-  //       <button className="button-delete" onClick={deleteEntry}>delete</button>
-  //       <button className="button-up" onClick={moveUp}>up</button>
-  //       <button className="button-down" onClick={moveDown}>down</button>
-  //     </div>
-  //   );
-  // }
-  // if (results === undefined) {
-  //   return (
-  //     <div className="prediction-box">
-  //       <li>#{props.index}</li>
-  //       <li>imdbID:{props.id}</li>
-  //       <button className="button-delete" onClick={deleteEntry}>delete</button>
-  //       <button className="button-up" onClick={moveUp}>up</button>
-  //       <button className="button-down" onClick={moveDown}>down</button> */
-  //     </div>
-  //   );
-  // }
-
-  // FOR NON-CONDITIONAL RENDERING //
+  //CONDITIONAL//
   return (
     <div className="prediction-box">
       <li>#{props.index}</li>
-      <li>imdbID:{props.id}</li>
-      <button className="button-delete" onClick={deleteEntry}>delete</button>
-      <button className="button-up" onClick={moveUp}>up</button>
-      <button className="button-down" onClick={moveDown}>down</button>
+      <h3>{results && results.Title}</h3>
+      <li>Directed by <strong>{results && results.Director}</strong></li>
+      <li>imdbID:{results && results.imdbID}</li>
+      {results && <button className="button-delete" onClick={() => props.deleteEntry(results.imdbID)}>delete</button>}
+      {results && <button className="button-up" onClick={() => props.moveUp(results.imdbID)}>up</button>}
+      {results && <button className="button-down" onClick={() => props.moveDown(results.imdbID)}>down</button>}
     </div>
   );
 
