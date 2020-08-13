@@ -9,7 +9,7 @@ const PredictionEntry = (props) => {
 
   const cells = []
   if (props.searchArr.length > 0) { // if displaySearch isn't empty
-    for (let i=0; (i<props.searchArr.length) && (i<6); i++) {
+    for (let i=0; (i<props.searchArr.length) && (i<10); i++) {
       const el = props.searchArr[i]
 
       // These end up in the final object
@@ -43,7 +43,6 @@ const PredictionEntry = (props) => {
       .then((res) => {
         const results = (titleOrId==='i') ? res.data : res.data.Search; // if search by title, returns array
         if (results !== undefined) {
-          console.log(results)
           //======= STATE CHANGE: DISPLAY_SEARCH =======/
           props.displaySearch(results);
         };
@@ -60,6 +59,7 @@ const PredictionEntry = (props) => {
       <input 
         type="search" 
         id="film-entry-input"
+        autoComplete="off"
         onKeyUp={displaySearch}
       />
       <div id="film-entry-dropdown">

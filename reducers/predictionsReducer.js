@@ -15,7 +15,7 @@ const predictionsReducer = (state = initialState, action) => {
 
   switch(action.type) {
 
-  //==========================//
+  //==========================
     case types.ENTER_FILM: // SearchDisplay
       const newEntry = action.payload;
       predictionList = state.predictionList.slice(); // shallow copy of current state predictionlist
@@ -27,17 +27,19 @@ const predictionsReducer = (state = initialState, action) => {
         predictionList,
       };
 
-  //==========================//
+  //==========================
     case types.DISPLAY_SEARCH: // PredictionEntry
       // populate the array w payload input
       const searchArr = (Array.isArray(action.payload)) ? action.payload : [action.payload] // comes in as raw array of objects
-      
+
+      searchArr.sort((a,b) => (a.Year < b.Year) ? 1 : -1) // sort by year
+
       return {
         ...state,
         searchArr,
       };
 
-  //==========================//
+  //==========================
     case types.DELETE_ENTRY: // PredictionBox
       imdbID = action.payload;
       predictionList = [];
@@ -52,8 +54,11 @@ const predictionsReducer = (state = initialState, action) => {
           if (predictionList[i].id === imdbID) return i;
         }
       };
-      
-      predictionList.splice(index(), 1); // remove element from array
+
+      i = index()
+      console.log('Delete removes from this position: ', i)
+      console.log('Which has this id: ', predictionList[i].id)
+      predictionList.splice(i, 1); // remove element from array
 
       for (let i=0; i<predictionList.length; i++){ // loop through again to reassign numbers
         predictionList[i].index = i+1;
@@ -64,7 +69,7 @@ const predictionsReducer = (state = initialState, action) => {
         predictionList,
       };
 
-  //==========================//
+  //==========================
     case types.MOVE_UP: // PredictionBox
       imdbID = action.payload;
       predictionList = [];
@@ -96,7 +101,7 @@ const predictionsReducer = (state = initialState, action) => {
         predictionList,
       };
 
-  //==========================//
+  //==========================
     case types.MOVE_DOWN: // PredictionBox
       imdbID = action.payload;
       predictionList = [];
@@ -128,7 +133,7 @@ const predictionsReducer = (state = initialState, action) => {
         predictionList,
       };
 
-  //==========================//
+  //==========================
     default:
       return state;
   };

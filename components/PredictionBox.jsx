@@ -1,63 +1,76 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { library, icon } from '@fortawesome/fontawesome-svg-core'
+import "@babel/polyfill";
 const APIKEY = 'e1ce364a'
 
 const PredictionBox = (props) => {
-  let test;
-  // const id = props.id
-  // const [results, setResults] = useState(null); // [stateProp, funcToChangeStateProp]  --- aka stateless component
+  // let results;
+  const id = props.id
+  const [results, setResults] = useState(); // [stateProp, funcToChangeStateProp]  --- aka stateless component
 
-  // useEffect(() => {
-    
-    // const load = async () => {
-    //   try {
-    //     const res = await axios.get(`http://www.omdbapi.com/?i=${id}&apikey=${APIKEY}`);
-    //     setResults(res.data)
-    //   } catch(err) {
-    //     console.log(err);
-    //   }
-    // };
-    // load();
-  // });
-
-  // const testFunc = async () => {
-  //   console.log('testFunc')
-  //     try {
-  //       const res = await axios.get(`http://www.omdbapi.com/?i=${id}&apikey=${APIKEY}`);
-  //       console.log('result of fetch: ', res.data)
-  //     } catch(err) {
-  //       console.log(err);
-  //     }
-  // }
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await axios.get(`http://www.omdbapi.com/?i=${id}&apikey=${APIKEY}`);
+        // results = res.data
+        setResults(res.data)
+      } catch(err) {
+      }
+    };
+    load();
+  }, []);
 
   const deleteEntry = () => {
-    props.deleteEntry(props.id)
+    console.log(results.imdbID)
+    props.deleteEntry(results.imdbID)
   };
 
   const moveUp = () => {
-    props.moveUp(props.id)
+    props.moveUp(results.imdbID)
   };
 
   const moveDown = () => {
-    props.moveDown(props.id)
+    props.moveDown(results.imdbID)
   };
 
-  // testFunc();
-  // console.log('runs before return')
+  // FOR CONDITIONAL RENDERING //
+  // if (results !== undefined) {
+  //   return (
+  //     <div className="prediction-box">
+  //       <li className="list-rank">#{props.index}</li>
+  //       <h3>{results.Title}</h3>
+  //       <li>Directed by <strong>{results.Director}</strong></li>
+  //       <li>imdbID:{results.imdbID}</li>
+  
+  //       <button className="button-delete" onClick={deleteEntry}>delete</button>
+  //       <button className="button-up" onClick={moveUp}>up</button>
+  //       <button className="button-down" onClick={moveDown}>down</button>
+  //     </div>
+  //   );
+  // }
+  // if (results === undefined) {
+  //   return (
+  //     <div className="prediction-box">
+  //       <li>#{props.index}</li>
+  //       <li>imdbID:{props.id}</li>
+  //       <button className="button-delete" onClick={deleteEntry}>delete</button>
+  //       <button className="button-up" onClick={moveUp}>up</button>
+  //       <button className="button-down" onClick={moveDown}>down</button> */
+  //     </div>
+  //   );
+  // }
+
+  // FOR NON-CONDITIONAL RENDERING //
   return (
     <div className="prediction-box">
-      {/* <li>Title: 'Hello'</li>
-      <li>Year: '2020'</li> */}
       <li>#{props.index}</li>
-      <li>Title: {props.title}</li>
-      <li>Year: {props.year}</li>
-
+      <li>imdbID:{props.id}</li>
       <button className="button-delete" onClick={deleteEntry}>delete</button>
       <button className="button-up" onClick={moveUp}>up</button>
       <button className="button-down" onClick={moveDown}>down</button>
     </div>
   );
+
 };
 
 export default PredictionBox;

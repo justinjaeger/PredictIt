@@ -12,11 +12,8 @@ const PredictionsDisplay = (props) => {
 
     list.push(
       <PredictionBox 
-        // These are from the final object (created in PredictionsEntry)
+        // Taken from predictionList
         id = {el.id}
-        title = {el.title}
-        year = {el.year}
-        poster = {el.poster}
         index = {el.index}
         // other props
         key = {i}

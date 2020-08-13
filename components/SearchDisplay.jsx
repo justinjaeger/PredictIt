@@ -19,8 +19,7 @@ const SearchDisplay = (props) => {
       className="dropdown-cell" 
       onClick={selectFilm} // function should populate the 
     >
-      <li>Title: {props.title}</li>
-      <li>Year: {props.year}</li>
+      <li>{props.title} ({props.year})</li>
     </div>
   )
 };
