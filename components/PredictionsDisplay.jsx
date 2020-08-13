@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import axios from 'axios';
+const APIKEY = 'e1ce364a'
 // import child components
 import PredictionBox from '../components/PredictionBox.jsx';
 
@@ -6,10 +8,21 @@ const PredictionsDisplay = (props) => {
 
   const list = []
   for (let i=0; i<props.predictionList.length; i++) {
+    let el = props.predictionList[i]
+
     list.push(
       <PredictionBox 
-        title = {props.predictionList[i].title}
-        year = {props.predictionList[i].year}
+        // These are from the final object (created in PredictionsEntry)
+        id = {el.id}
+        title = {el.title}
+        year = {el.year}
+        poster = {el.poster}
+        index = {el.index}
+        // other props
+        key = {i}
+        deleteEntry = {props.deleteEntry}
+        moveUp = {props.moveUp}
+        moveDown = {props.moveDown}
       />
     );
   }

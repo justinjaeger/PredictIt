@@ -12,6 +12,7 @@
   "author": "Justin Jaeger",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@reduxjs/toolkit": "^1.4.0",
     "axios": "^0.19.2",
     "babel": "^6.23.0",

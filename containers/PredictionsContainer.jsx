@@ -13,6 +13,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({ // receives dispatch method and returns callback props (aka actions) that allow you to update state
   enterFilm: (input) => dispatch(actions.enterFilm(input)),
   displaySearch: (input) => dispatch(actions.displaySearch(input)),
+  deleteEntry: (input) => dispatch(actions.deleteEntry(input)),
+  moveUp: (input) => dispatch(actions.moveUp(input)),
+  moveDown: (input) => dispatch(actions.moveDown(input)),
 });
 
 class PredictionsContainer extends Component {
@@ -26,10 +29,15 @@ class PredictionsContainer extends Component {
       <PredictionsDisplay 
         // state
         predictionList = {this.props.predictionList}
+        // dispatch
+        deleteEntry = {this.props.deleteEntry}
+        moveUp = {this.props.moveUp}
+        moveDown = {this.props.moveDown}
       />
       <PredictionEntry 
         // state
         searchArr = {this.props.searchArr}
+        predictionList = {this.props.predictionList}
         // dispatch
         enterFilm = {this.props.enterFilm}
         displaySearch = {this.props.displaySearch}

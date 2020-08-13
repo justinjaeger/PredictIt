@@ -6,6 +6,10 @@ class App extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    console.log('componentDidMount');
+  }
+
   render() {
     console.log('rendering in app.jsx');
     return (

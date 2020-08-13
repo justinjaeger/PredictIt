@@ -12,15 +12,23 @@ const PredictionEntry = (props) => {
     for (let i=0; (i<props.searchArr.length) && (i<6); i++) {
       const el = props.searchArr[i]
 
+      // These end up in the final object
       const title = el.Title
       const year = el.Year
+      const id = el.imdbID
+      const poster = el.Poster
+      const index = props.predictionList.length+1;
 
       cells.push(
         <SearchDisplay 
-          // will eventually be dynamic props that deconstruct the obj
           title = {title}
           year = {year}
+          id = {id}
+          poster = {poster}
+          index = {index}
           enterFilm = {props.enterFilm}
+          // searchArr = {props.searchArr}
+          key = {i}
         />
       );
     };
@@ -28,16 +36,17 @@ const PredictionEntry = (props) => {
 
   const displaySearch = () => {
     const input = document.querySelector('#film-entry-input').value;
+    const titleOrId = (input[0]==='t' && input[1]==='t') ? 'i' : 's'; // searching a title or movie?
 
     if (input !== undefined) {
-      axios.get(`http://www.omdbapi.com/?s=${input}&apikey=${APIKEY}`) // searches your input
+      axios.get(`http://www.omdbapi.com/?${titleOrId}=${input}&apikey=${APIKEY}`) // searches your input
       .then((res) => {
-        const resultsArr = res.data.Search; // gets an array of search results
-        if (resultsArr !== undefined) {
-          console.log(resultsArr);
+        const results = (titleOrId==='i') ? res.data : res.data.Search; // if search by title, returns array
+        if (results !== undefined) {
+          console.log(results)
           //======= STATE CHANGE: DISPLAY_SEARCH =======/
-          props.displaySearch(resultsArr);
-        }
+          props.displaySearch(results);
+        };
       })
       .catch((err) => {
         console.log('error while fetching from OMDb: ', err)
