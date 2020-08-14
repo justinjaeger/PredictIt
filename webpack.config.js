@@ -17,11 +17,13 @@ module.exports = {
           presets: ["@babel/preset-env", "@babel/preset-react"], // not sure I need the last one
         }
       },
-      { // css files
-        test: /\.css$/,
+      { // load SCSS
+        test: /\.s[ac]ss$/i,
+        exclude: /(node_modules)/,
         use: [
-          'style-loader',
+          'style-loader', // ! order is important!
           'css-loader',
+          'sass-loader', // need an additional loader to handle the result of these loaders
         ],
       }
     ]
@@ -29,5 +31,8 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     port: 9000,
+    // proxy: {
+    //   '/': 'http://localhost:8000',
+    // }
   }
 }

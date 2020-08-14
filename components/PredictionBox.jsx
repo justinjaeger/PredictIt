@@ -8,6 +8,7 @@ const PredictionBox = (props) => {
   const id = props.id
   const [results, setResults] = useState(); // [stateProp, funcToChangeStateProp]  --- aka stateless component
 
+  // LIKE COMPONENT DID MOUNT - Fires after the return(), waits for the fetch, then updates the "results" component, which THEN makes the functions inside return() go
   useEffect(() => {
     const load = async () => {
       try {
@@ -21,10 +22,11 @@ const PredictionBox = (props) => {
   }, [results]);
 
   //CONDITIONAL//
+  // conditional statements depend on the results being NOT undefined: {results && ...functionality...}
   return (
     <div className="prediction-box">
       <li>#{props.index}</li>
-      <h3>{results && results.Title}</h3>
+      <h3>{results && results.Title}</h3> 
       <li>Directed by <strong>{results && results.Director}</strong></li>
       <li>imdbID:{results && results.imdbID}</li>
       {results && <button className="button-delete" onClick={() => props.deleteEntry(results.imdbID)}>delete</button>}
