@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: 'development',
@@ -34,5 +35,6 @@ module.exports = {
     // proxy: {
     //   '/': 'http://localhost:8000',
     // }
-  }
+  },
+  // plugins: [new HtmlWebpackPlugin()], // generates a file dist/html
 }
