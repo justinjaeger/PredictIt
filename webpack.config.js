@@ -1,15 +1,17 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
-
+// const { NoEmitOnErrorsPlugin } = require('webpack');
+// const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
-  entry: './src/client/index.js', // the module where webpack begins building its dependency graph
+  entry: './src/client/index.js', // the module where webpack begins building
   output: { // where to emit the bundles (path and name)
     path: path.resolve(__dirname, 'dist'), // "dist" is the folder name (the file is index.html)
     filename: 'bundle.js', // outputs this file into the above 'dist' directory
   },
+  devtool: 'eval-source-map',
+  mode: process.env.NODE_ENV,
   module: {
     rules: [
       { // load JSX
@@ -25,27 +27,45 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       { // load SCSS
-        test: /\.s[ac]ss$/i,
+        test: /.(css|scss)$/,
         exclude: /(node_modules)/,
         use: [
           'style-loader', // ! order is important!
           'css-loader',
           'sass-loader', // need an additional loader to handle the result of these loaders
         ],
-      }
+      },
+      { // load images
+        test: /\.(png|jpe?g|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ]
   },
   devServer: {
-    port: 9000,
+    port: 8000,
+    hot: true,
+    contentBase: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+    // contentBase: path.resolve(__dirname, 'dist')
     proxy: {
-      '/': 'http://localhost:9000',
-      secure: false,
+      '/': {
+        target: 'http://localhost:9000', // re-routes here for some requests
+        secure: false,
+      }
     }
   },
   plugins: [
-    new CleanWebpackPlugin(), // remove build folders before building
-    new HtmlWebpackPlugin(), // generates a file dist/html
+    new HtmlWebpackPlugin({
+      template: './src/client/index.html'
+    }), // generates a file dist/html
   ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
 }
 
 // I used this resource to help with the configuration:
